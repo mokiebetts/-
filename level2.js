@@ -232,3 +232,90 @@ function solution(arr, divisor) {
 
     return b;
 }
+
+//음양더하기
+
+//for 문을 이용하자.양수 음수에 대해서는 signs[i]가 판단할 것이고 i는 0으로 계속커지면서 absolutes에 들어가는 숫자로 인식하였기에 absolutes.length보다 작은 수로 계속해서 커지며 
+
+//signs[i] 가 맞으면 += 아니면 -=을 적는다. 
+
+
+function solution(absolutes, signs) {
+
+    let result = 0;
+
+    for (let i = 0; i < absolutes.length; i++) {
+        if (signs[i]) {
+            result += absolutes[i];
+        } else {
+            result -= absolutes[i];
+        }
+    }
+    return result;
+}
+
+//핸드폰 가리기
+
+//slice로 잘라서 replace로 *로 바꾸려고 했으며 찾아보니 /\d/g 은 d=숫자 g= 글로벌로 0~-4까지의 숫자를 *로 대체한 a
+//뒤에서 4개짜른 b
+//둘을 더한다. 
+
+
+function solution(phone_number) {
+
+    const length = phone_number.length;
+    const a = phone_number.slice(0, length - 4).replace(/\d/g, '*');
+    const b = phone_number.slice(-4);
+
+    return a + b;
+}
+
+
+//없는 숫자 더하기
+
+//흠...그냥 0~9까지 더한 수가 45이니 거기에 배열 numbers의 합을 빼주었다. 
+
+function solution(numbers) {
+    let a = numbers.reduce((acc, num) => acc + num, 0);
+    return 45 - a;
+}
+
+
+//제일 작은 수 제거하기
+
+//처음에는 내림차순으로 배열하고 제일 뒤에 값을 잘라내는 식을 생각했는데 만약 최소값이 중복되면 하나만 잘라내는 일이 생길것 같아 아예 미니멈값을 할당해서 그 값과 같은 값들은 필터되어서 제외할 수 있는 식을 써봤다.
+
+//math.min은 숫자 함수로 배열에서 가장 작은 수를 뽑아내는 명령어이다.
+
+
+function solution(arr) {
+    if (arr.length <= 1) {
+        return [-1];
+    }
+
+    const minimum = Math.min(...arr);
+    const result = arr.filter(num => num !== minimum);
+
+    return result.length > 0 ? result : [-1];
+}
+
+
+//가운데 글자 가져오기 
+
+//우선, 가운데 함수를 찾아낼 내장함수가 필요했다.
+//math.floor는 소수점 아래를 짤라내는 내장함수로 s의 길이를 반으로 나눈 값이 가운데면 floor 랭스 나눈기 2 는 가운데 함수를 두고 뒤에를 짤라내는 형식이다
+
+// 짝수시 미들인덱스 앞뒤로 하나식 나타내고 홀수시 charAt내장함수로 함수내에서 미들에 있는 자리의 문자를 뽑아낸다.
+
+function solution(s) {
+
+    const middleIndex = Math.floor(s.length / 2);
+
+    if (s.length % 2 === 0) {
+
+        return s.slice(middleIndex - 1, middleIndex + 1);
+    } else {
+
+        return s.charAt(middleIndex);
+    }
+}
