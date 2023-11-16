@@ -319,3 +319,110 @@ function solution(s) {
         return s.charAt(middleIndex);
     }
 }
+
+
+//수박수박수박수박수박수?
+
+//음...for문을 써보자는 생각이 들었고 이게 n/2가 정수일때만을 생각하고 뒤에 수를 붙이는 방법으로 했다.
+//만약 n/2가 3/2 면 mathflor 3/2인 i는 1일 것이고 그럼 수박 한번 반복하고 남은 반쪽은 만약 n을 i로 나눈값이 1이면 뒤에 "수"를 붙이기로했다.
+
+function solution(n) {
+    let result = "";
+
+    for (let i = 0; i < Math.floor(n / 2); i++) {
+        result += "수박";
+    }
+
+    if (n % 2 === 1) {
+        result += "수";
+    }
+
+    return result;
+}
+
+
+//function solution(n) { return "수박".repeat(n / 2) + (n % 2 === 1 ? '수' : ''); }
+//다른이는 이런식으로 쓰기도 했다
+
+
+//.내적
+
+//이건 모르겠어서 다른사람의 풀이를 썼다.
+//아래와 같이 a라는 배열에 acc,val,index라는 요소까지 넣어서 즉, a+b*b[index] 형태의 반복문을 사용했다.
+//이건 메모.
+
+function solution(a, b) {
+    return a.reduce((acc, val, index) => acc + val * b[index], 0);
+}
+
+
+//
+function solution(a, b) {
+    var sum = 0;
+    for (var i = 0; i < a.length; i++) {
+        sum += a[i] * b[i];
+    }
+    return sum;
+}
+//쉽게는 이런 방식도있다.
+
+
+//약수의 개수와 덧셈
+
+//약수의 개수를 나타내는 func를 먼저 만들자는 생각이들었다.
+//후에 그 약수의 개수가 짝수면 +i 홀수면 -i를 적어주었다.
+
+function solution(left, right) {
+    function 약수의개수(num) {
+        let count = 0;
+
+        for (let i = 1; i <= num; i++) {
+            if (num % i === 0) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+    let result = 0
+
+    for (let i = left; i <= right; i++) {
+
+        const A = 약수의개수(i);
+
+        if (A % 2 === 0) {
+            result += i;
+        } else if (A % 2 === 1) {
+            result -= i;
+        }
+    }
+    return result;
+}
+
+//문자열 내림차순으로 배치하기
+
+//많이 헛갈렸지만 a와b를 비교해서 a가 b보다 크면 -값을 갖기에 뒤로 보내지고 b가 a보다 크면 +값을 갖게해서 대문자 소문자 도 구분할 수 있게끔 했다.
+function solution(s) {
+    return s.split('').sort((a, b) => {
+        if (a > b) return -1;
+        if (b > a) return 1;
+        return 0;
+    }).join('');
+}
+
+//부족한 금액 계산하기
+
+//이건 원래 하던 for 문을 사용했습니다.
+//어려운것은 없었고 이 count을 더해서 totalcost을 내야한 다는것을 주의해야합니다. 
+
+function solution(price, money, count) {
+    let totalCost = 0;
+
+    for (let i = 1; i <= count; i++) {
+        totalCost += price * i;
+    }
+
+    const needMoney = totalCost - money;
+
+    return needMoney > 0 ? needMoney : 0;
+}
